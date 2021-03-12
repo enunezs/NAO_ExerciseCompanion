@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.0.1" uuid="little-apple-dance">
+  <names>
+    <name lang="en_US">Little Apple Dance</name>
+    <name lang="fr_FR">La danse de la petite pomme</name>
+    <name lang="zh_CN">小苹果舞</name>
+  </names>
+  <descriptions>
+    <description lang="en_US">Nao dances on a very famous Chinese pop song.</description>
+    <description lang="fr_FR">Nao danse sur une chanson populaire de pop Chinoise.</description>
+    <description lang="zh_CN">闹跟着中国著名歌曲“小苹果”的节奏跳舞
+</description>
+  </descriptions>
+  <supportedLanguages>
+    <language>zh_CN</language>
+    <language>en_US</language>
+    <language>fr_FR</language>
+  </supportedLanguages>
+  <descriptionLanguages>
+    <language>zh_CN</language>
+    <language>en_US</language>
+    <language>fr_FR</language>
+  </descriptionLanguages>
+  <contents>
+    <behaviorContent path=".">
+      <nature>interactive</nature>
+      <names>
+        <name lang="en_US">Little Apple Dance</name>
+        <name lang="fr_FR">La danse de la petite pomme</name>
+        <name lang="zh_CN">小苹果舞</name>
+      </names>
+      <descriptions>
+        <description lang="en_US">Nao dances on a very famous Chinese pop song.</description>
+        <description lang="fr_FR">Nao danse sur une chanson populaire de pop Chinoise.</description>
+        <description lang="zh_CN">2014中国神曲之一“小苹果”</description>
+      </descriptions>
+      <triggerSentences>
+        <sentence lang="en_US">The little apple dance</sentence>
+        <sentence lang="fr_FR">La danse de la petite pomme</sentence>
+        <sentence lang="zh_CN">小苹果</sentence>
+      </triggerSentences>
+      <permissions>
+        <canStandUp/>
+      </permissions>
+    </behaviorContent>
+    <dialogContent typeVersion="1.0" topicName="collaborative_little_apple">
+      <topic path="collaborative_little_apple/collaborative_little_apple_enu.top" language="en_US"/>
+      <topic path="collaborative_little_apple/collaborative_little_apple_frf.top" language="fr_FR"/>
+      <topic path="collaborative_little_apple/collaborative_little_apple_mnc.top" language="zh_CN"/>
+    </dialogContent>
+  </contents>
+  <requirements>
+    <naoqiRequirement maxVersion="2" minVersion="2.1.2.17"/>
+    <robotRequirement model="NAO_H25" minBodyVersion="5.0" minHeadVersion="5.0"/>
+  </requirements>
+</package>
