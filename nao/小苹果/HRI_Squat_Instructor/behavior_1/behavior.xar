@@ -29,8 +29,8 @@
               <Timeline enable="1" fps="25" start_frame="1" end_frame="-1" size="-1">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
-                    <Diagram>
-                      <Box name="Say Text" id="1" localization="8" tooltip="Say the text received on its input." x="280" y="154">
+                    <Diagram scale="100">
+                      <Box name="Say Text" id="1" localization="8" tooltip="Say the text received on its input." x="293" y="218">
                         <bitmap>media/images/box/interaction/say.png</bitmap>
                         <script language="4">
                           <content>
@@ -191,7 +191,7 @@ class MyClass(GeneratedClass):
                         <Parameter name="Enable word spotting" inherits_from_parent="0" content_type="0" value="0" default_value="0" tooltip="If this option is not activated the robot will only understand exact expressions. If it is, he will spot the exact expressions even in the middle of a sentence.&#x0A;&#x0A;!!Warning!! This option is only available with the speech recognition module using Nuance (ie in Atom version of the robot)." id="9" />
                         <Resource name="Speech recognition" type="Lock" timeout="0" />
                       </Box>
-                      <Box name="Switch Case" id="4" localization="8" tooltip="Test input value and stimulate the output matching to this value. If there is no&#x0A;matching output, the default output (onDefault) is stimulated.&#x0A;&#x0A;You can edit a case by left double-clicking on the line. You can add a&#x0A;case by right clicking on a line and selecting &apos;Insert a row&apos;. You can delete&#x0A;a case by right clicking on a line and selecting &apos;Remove a row&apos;." plugin="dispatcher_plugin" x="528" y="150">
+                      <Box name="Switch Case" id="4" localization="8" tooltip="Test input value and stimulate the output matching to this value. If there is no&#x0A;matching output, the default output (onDefault) is stimulated.&#x0A;&#x0A;You can edit a case by left double-clicking on the line. You can add a&#x0A;case by right clicking on a line and selecting &apos;Insert a row&apos;. You can delete&#x0A;a case by right clicking on a line and selecting &apos;Remove a row&apos;." plugin="dispatcher_plugin" x="526" y="130">
                         <bitmap>media/images/box/interaction/choice.png</bitmap>
                         <script language="4">
                           <content>
@@ -350,7 +350,7 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("INTRODUCTION\n")]]>
+		self.onStopped("INTRODUCTION\r\n")]]>
                           </content>
                         </script>
                         <pluginContent>
@@ -683,7 +683,7 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("Let me help you get motivated.\nWe were going to do some squats today. Its a good exercise that strengthens your lower body and your core. It also does not require any equipments to be performed.")]]>
+		self.onStopped("Let me help you get motivated.\r\nWe were going to do some squats today. Its a good exercise that strengthens your lower body and your core. It also does not require any equipments to be performed.")]]>
                           </content>
                         </script>
                         <pluginContent>
@@ -1076,7 +1076,7 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("I am now going to instruct you through the exercise.\n")]]>
+		self.onStopped("I am now going to instruct you through the exercise.\r\n")]]>
                           </content>
                         </script>
                         <pluginContent>
@@ -1155,7 +1155,7 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("As i said we dont require any equipments for this exercise routine.\n")]]>
+		self.onStopped("As i said we dont require any equipments for this exercise routine.\r\n")]]>
                           </content>
                         </script>
                         <pluginContent>
@@ -1312,7 +1312,7 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("Then, drive your hips back and by bending your knees, imagine sitting on a virtual chair, by lowering your hips towards the ground to your knee joint height.\n")]]>
+		self.onStopped("Then, drive your hips back and by bending your knees, imagine sitting on a virtual chair, by lowering your hips towards the ground to your knee joint height.\r\n")]]>
                           </content>
                         </script>
                         <pluginContent>
@@ -1665,7 +1665,7 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("Good job!\nNow let\'s do this ten more times.\nFeel free to stop when you feel like you cant perfom the exercise any further.")]]>
+		self.onStopped("Good job!\r\nNow let\'s do this ten more times.\r\nFeel free to stop when you feel like you cant perfom the exercise any further.")]]>
                           </content>
                         </script>
                         <pluginContent>
