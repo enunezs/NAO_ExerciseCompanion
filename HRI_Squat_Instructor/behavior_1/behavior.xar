@@ -1702,7 +1702,7 @@ Feel free to stop when you feel like you cant perfom the exercise any further.]]
                 </BehaviorLayer>
               </Timeline>
             </Box>
-            <Box name="Post workout" id="3" localization="8" tooltip="" x="828" y="247">
+            <Box name="Post workout" id="3" localization="8" tooltip="" x="767" y="186">
               <bitmap>media/images/box/box-timeLine.png</bitmap>
               <script language="4">
                 <content>
@@ -3144,7 +3144,7 @@ class MyClass(GeneratedClass):
                 </BehaviorLayer>
               </Timeline>
             </Box>
-            <Box name="Exercise Routine" id="4" localization="8" tooltip="" x="285" y="441">
+            <Box name="Exercise Routine" id="4" localization="8" tooltip="" x="430" y="477">
               <bitmap>media/images/box/box-diagram.png</bitmap>
               <script language="4">
                 <content>
@@ -3205,7 +3205,7 @@ class MyClass(GeneratedClass):
                         <Output name="onReinitialized" type="1" type_size="1" nature="2" inner="0" tooltip="Stimulated when the loop is over or if the counter has been reinitialized." id="5" />
                         <Parameter name="Initial value" inherits_from_parent="0" content_type="1" value="1" default_value="0" min="0" max="500" tooltip="The initial value of the counter (for the first iteration)." id="6" />
                         <Parameter name="Step value" inherits_from_parent="0" content_type="1" value="1" default_value="1" min="1" max="500" tooltip="The counter value will be incremented or decremented with this value." id="7" />
-                        <Parameter name="Final value" inherits_from_parent="0" content_type="1" value="10" default_value="5" min="0" max="500" tooltip="It is the maximum (if increasing) or the minimum (if decreasing) value of the&#x0A;counter (thus for the last iteration).&#x0A;&#x0A;After this value, if the onStart input is called, the onReinitialized output will be&#x0A;stimulated and the counter will be reinitialized to its Initial value." id="8" />
+                        <Parameter name="Final value" inherits_from_parent="0" content_type="1" value="3" default_value="5" min="0" max="500" tooltip="It is the maximum (if increasing) or the minimum (if decreasing) value of the&#x0A;counter (thus for the last iteration).&#x0A;&#x0A;After this value, if the onStart input is called, the onReinitialized output will be&#x0A;stimulated and the counter will be reinitialized to its Initial value." id="8" />
                       </Box>
                       <Box name="Say Text" id="17" localization="8" tooltip="Say the text received on its input." x="382" y="397">
                         <bitmap>media/images/box/interaction/say.png</bitmap>
@@ -3263,19 +3263,161 @@ class MyClass(GeneratedClass):
                         <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
                         <Resource name="Speech" type="Lock" timeout="0" />
                       </Box>
+                      <Box name="SquatAnimation" id="1" localization="8" tooltip="" x="609" y="340">
+                        <bitmap>media/images/box/box-python-script.png</bitmap>
+                        <script language="4">
+                          <content>
+                            <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        #self.onStopped() #activate the output of the box
+        # Choregraphe bezier export in Python.
+        from naoqi import ALProxy
+        names = list()
+        times = list()
+        keys = list()
+
+        names.append("LAnklePitch")
+        times.append([0.16, 0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[0.0748345, [3, -0.0666667, 0], [3, 0.0666667, 0]], [0.078192, [3, -0.0666667, 0], [3, 0.24, 0]], [0.072671, [3, -0.24, 0.005521], [3, 0.306667, -0.00705461]], [-0.591667, [3, -0.306667, 0.00051733], [3, 0.24, -0.000404867]], [-0.592072, [3, -0.24, 0], [3, 0.533333, 0]], [0.072671, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("LAnkleRoll")
+        times.append([0.16, 0.36, 1.08, 4.32])
+        keys.append([[-0.100258, [3, -0.0666667, 0], [3, 0.0666667, 0]], [-0.110793, [3, -0.0666667, 0], [3, 0.24, 0]], [-0.102572, [3, -0.24, 0], [3, 1.08, 0]], [-0.102572, [3, -1.08, 0], [3, 0, 0]]])
+
+        names.append("LElbowRoll")
+        times.append([0.16])
+        keys.append([[-0.581868, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("LElbowYaw")
+        times.append([0.16])
+        keys.append([[-1.21523, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("LHand")
+        times.append([0.16])
+        keys.append([[0.316213, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("LHipPitch")
+        times.append([0.16, 0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[0.17994, [3, -0.0666667, 0], [3, 0.0666667, 0]], [0.124229, [3, -0.0666667, 0], [3, 0.24, 0]], [0.158825, [3, -0.24, 0], [3, 0.306667, 0]], [-0.865683, [3, -0.306667, 0], [3, 0.24, 0]], [-0.865683, [3, -0.24, 0], [3, 0.533333, 0]], [0.158825, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("LHipRoll")
+        times.append([0.16, 0.36, 1.08, 4.32])
+        keys.append([[0.100173, [3, -0.0666667, 0], [3, 0.0666667, 0]], [0.111159, [3, -0.0666667, 0], [3, 0.24, 0]], [0.110068, [3, -0.24, 0], [3, 1.08, 0]], [0.110068, [3, -1.08, 0], [3, 0, 0]]])
+
+        names.append("LHipYawPitch")
+        times.append([0.16, 0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[-0.1615, [3, -0.0666667, 0], [3, 0.0666667, 0]], [-0.175358, [3, -0.0666667, 0], [3, 0.24, 0]], [-0.159456, [3, -0.24, 0], [3, 0.306667, 0]], [-0.592246, [3, -0.306667, 0], [3, 0.24, 0]], [-0.592246, [3, -0.24, 0], [3, 0.533333, 0]], [-0.159456, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("LKneePitch")
+        times.append([0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[-0.0855211, [3, -0.133333, 0], [3, 0.24, 0]], [-0.0915631, [3, -0.24, 0], [3, 0.306667, 0]], [1.57663, [3, -0.306667, 0], [3, 0.24, 0]], [1.57663, [3, -0.24, 0], [3, 0.533333, 0]], [-0.0915631, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("LShoulderPitch")
+        times.append([0.16, 0.76, 1.08, 2.72, 4.32])
+        keys.append([[1.49746, [3, -0.0666667, 0], [3, 0.2, 0]], [0.354023, [3, -0.2, 0], [3, 0.106667, 0]], [0.354023, [3, -0.106667, 0], [3, 0.546667, 0]], [0.354023, [3, -0.546667, 0], [3, 0.533333, 0]], [0.354023, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("LShoulderRoll")
+        times.append([0.16])
+        keys.append([[0.201966, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("LWristYaw")
+        times.append([0.16])
+        keys.append([[0.108056, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("RAnklePitch")
+        times.append([0.16, 0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[0.0805995, [3, -0.0666667, 0], [3, 0.0666667, 0]], [0.083217, [3, -0.0666667, 0], [3, 0.24, 0]], [0.076799, [3, -0.24, 0.00641793], [3, 0.306667, -0.00820068]], [-0.591667, [3, -0.306667, 0.00413915], [3, 0.24, -0.00323934]], [-0.594906, [3, -0.24, 0], [3, 0.533333, 0]], [0.076799, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("RAnkleRoll")
+        times.append([0.16, 0.36, 1.08, 4.32])
+        keys.append([[0.0866963, [3, -0.0666667, 0], [3, 0.0666667, 0]], [0.10467, [3, -0.0666667, 0], [3, 0.24, 0]], [0.096242, [3, -0.24, 0], [3, 1.08, 0]], [0.096242, [3, -1.08, 0], [3, 0, 0]]])
+
+        names.append("RElbowRoll")
+        times.append([0.16])
+        keys.append([[0.507681, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("RElbowYaw")
+        times.append([0.16])
+        keys.append([[1.30786, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("RHand")
+        times.append([0.16])
+        keys.append([[0.346207, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("RHipPitch")
+        times.append([0.16, 0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[0.179769, [3, -0.0666667, 0], [3, 0.0666667, 0]], [0.124212, [3, -0.0666667, 0], [3, 0.24, 0]], [0.159369, [3, -0.24, 0], [3, 0.306667, 0]], [-0.866202, [3, -0.306667, 0], [3, 0.24, 0]], [-0.866202, [3, -0.24, 0], [3, 0.533333, 0]], [0.159369, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("RHipRoll")
+        times.append([0.16, 0.36, 1.08, 4.32])
+        keys.append([[-0.0968754, [3, -0.0666667, 0], [3, 0.0666667, 0]], [-0.113581, [3, -0.0666667, 0], [3, 0.24, 0]], [-0.11042, [3, -0.24, 0], [3, 1.08, 0]], [-0.11042, [3, -1.08, 0], [3, 0, 0]]])
+
+        names.append("RHipYawPitch")
+        times.append([0.16, 0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[-0.1615, [3, -0.0666667, 0], [3, 0.0666667, 0]], [-0.175358, [3, -0.0666667, 0], [3, 0.24, 0]], [-0.159456, [3, -0.24, 0], [3, 0.306667, 0]], [-0.592246, [3, -0.306667, 0], [3, 0.24, 0]], [-0.592246, [3, -0.24, 0], [3, 0.533333, 0]], [-0.159456, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("RKneePitch")
+        times.append([0.36, 1.08, 2, 2.72, 4.32])
+        keys.append([[-0.0853237, [3, -0.133333, 0], [3, 0.24, 0]], [-0.0907571, [3, -0.24, 0], [3, 0.306667, 0]], [1.57729, [3, -0.306667, 0], [3, 0.24, 0]], [1.57729, [3, -0.24, 0], [3, 0.533333, 0]], [-0.0907571, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("RShoulderPitch")
+        times.append([0.16, 0.76, 1.08, 2.72, 4.32])
+        keys.append([[1.48779, [3, -0.0666667, 0], [3, 0.2, 0]], [0.340601, [3, -0.2, 0], [3, 0.106667, 0]], [0.340601, [3, -0.106667, 0], [3, 0.546667, 0]], [0.340601, [3, -0.546667, 0], [3, 0.533333, 0]], [0.340601, [3, -0.533333, 0], [3, 0, 0]]])
+
+        names.append("RShoulderRoll")
+        times.append([0.16])
+        keys.append([[-0.166635, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        names.append("RWristYaw")
+        times.append([0.16])
+        keys.append([[0.142476, [3, -0.0666667, 0], [3, 0, 0]]])
+
+        try:
+          # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+          # motion = ALProxy("ALMotion", IP, 9559)
+          motion = ALProxy("ALMotion")
+          motion.angleInterpolationBezier(names, times, keys)
+        except BaseException, err:
+          print err
+        self.onStopped() # activate output of the box
+        self.bIsRunning = False
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+                          </content>
+                        </script>
+                        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                      </Box>
                       <Link inputowner="17" indexofinput="2" outputowner="16" indexofoutput="4" />
-                      <Link inputowner="16" indexofinput="2" outputowner="17" indexofoutput="4" />
-                      <Link inputowner="16" indexofinput="3" outputowner="0" indexofoutput="2" />
+                      <Link inputowner="0" indexofinput="4" outputowner="16" indexofoutput="5" />
+                      <Link inputowner="1" indexofinput="2" outputowner="17" indexofoutput="4" />
+                      <Link inputowner="16" indexofinput="2" outputowner="1" indexofoutput="4" />
+                      <Link inputowner="16" indexofinput="2" outputowner="0" indexofoutput="2" />
                     </Diagram>
                   </BehaviorKeyframe>
                 </BehaviorLayer>
               </Timeline>
             </Box>
-            <Link inputowner="0" indexofinput="4" outputowner="3" indexofoutput="4" />
             <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="4" />
             <Link inputowner="1" indexofinput="2" outputowner="25" indexofoutput="4" />
-            <Link inputowner="3" indexofinput="2" outputowner="4" indexofoutput="4" />
             <Link inputowner="4" indexofinput="2" outputowner="0" indexofoutput="2" />
+            <Link inputowner="0" indexofinput="4" outputowner="4" indexofoutput="4" />
           </Diagram>
         </BehaviorKeyframe>
       </BehaviorLayer>
