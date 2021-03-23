@@ -3154,7 +3154,8 @@ class MyClass(GeneratedClass):
               <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
               <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
               <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
-              <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+              <Output name="onStopped" type="2" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+              <Parameter name="Reps" inherits_from_parent="0" content_type="1" value="0" default_value="0" min="0" max="100" tooltip="" id="5" />
               <Timeline enable="0">
                 <BehaviorLayer name="behavior_layer1">
                   <BehaviorKeyframe name="keyframe1" index="1">
@@ -3482,7 +3483,7 @@ class MyClass(GeneratedClass):
                         <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
                         <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
                       </Box>
-                      <Box name="Say Text (2)" id="4" localization="8" tooltip="Say the text received on its input." x="1169" y="176">
+                      <Box name="Say Text (2)" id="4" localization="8" tooltip="Say the text received on its input." x="1148" y="177">
                         <bitmap>media/images/box/interaction/say.png</bitmap>
                         <script language="4">
                           <content>
@@ -3688,7 +3689,7 @@ class MyClass(GeneratedClass):
                         <Output name="output_1" type="0" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="4" />
                         <Output name="output_2" type="0" type_size="1" nature="2" inner="0" tooltip="This IO has been automatically added by box. Read box tooltip for more information." id="5" />
                       </Box>
-                      <Box name="Text Edit (2)" id="7" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="1045" y="305">
+                      <Box name="Text Edit (2)" id="7" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="976" y="358">
                         <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
                         <script language="4">
                           <content>
@@ -3698,19 +3699,19 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("We did")]]>
+		self.onStopped("We did ")]]>
                           </content>
                         </script>
                         <pluginContent>
                           <text>
-                            <![CDATA[We did]]>
+                            <![CDATA[We did ]]>
                           </text>
                         </pluginContent>
                         <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
                         <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
                         <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
                       </Box>
-                      <Box name="CUSTOM text" id="10" localization="8" tooltip="Say the text received on its input." x="1079" y="437">
+                      <Box name="CUSTOM text" id="10" localization="8" tooltip="Say the text received on its input." x="1240" y="423">
                         <bitmap>media/images/box/interaction/say.png</bitmap>
                         <script language="4">
                           <content>
@@ -3741,7 +3742,8 @@ class MyClass(GeneratedClass):
             sentence = "\RSPD="+ str( self.getParameter("Speed (%)") ) + "\ "
             sentence += "\VCT="+ str( self.getParameter("Voice shaping (%)") ) + "\ "
             sentence += str(p)
-            #sentence += str(q)
+            sentence += str(self.reps)
+            sentence += ' reps'
             sentence +=  "\RST\ "
             id = self.tts.pCall("say",str(sentence))
             self.ids.append(id)
@@ -3752,20 +3754,25 @@ class MyClass(GeneratedClass):
             except:
                 pass
             if( self.ids == [] ):
-                self.onStopped() # activate output of the box
+                self.onStopped(self.reps) # activate output of the box
                 self.bIsRunning = False
 
     def onInput_onStop(self):
-        self.onUnload()]]>
+        self.onUnload()
+
+    def onInput_repetitions(self, p):
+        self.reps = int(p)
+        pass]]>
                           </content>
                         </script>
                         <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
                         <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
                         <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
                         <Input name="repetitions" type="3" type_size="1" nature="1" inner="0" tooltip="" id="4" />
-                        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="5" />
+                        <Output name="onStopped" type="2" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="5" />
                         <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="6" />
                         <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="7" />
+                        <Parameter name="reps" inherits_from_parent="0" content_type="1" value="0" default_value="0" min="0" max="100" tooltip="" id="8" />
                         <Resource name="Speech" type="Lock" timeout="0" />
                       </Box>
                       <Box name="Wait For Signals" id="11" localization="8" tooltip="Wait for both inputs to be stimulated before stimulating its output." x="749" y="472">
@@ -3924,6 +3931,28 @@ class MyClass(GeneratedClass):
                         <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
                         <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
                       </Box>
+                      <Box name="Text Edit (5)" id="14" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="250" y="492">
+                        <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
+                        <script language="4">
+                          <content>
+                            <![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("And, Go!")]]>
+                          </content>
+                        </script>
+                        <pluginContent>
+                          <text>
+                            <![CDATA[And, Go!]]>
+                          </text>
+                        </pluginContent>
+                        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                        <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
+                        <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
+                      </Box>
                       <Box name="Random Int." id="18" localization="8" tooltip="Generate a random integer between a min number and a max number set as&#x0A;parameters.&#x0A;Note that the min and max numbers are included in the range of possible values." x="145" y="325">
                         <bitmap>media/images/box/box-script.png</bitmap>
                         <script language="4">
@@ -4068,28 +4097,6 @@ class MyClass(GeneratedClass):
                         <Output name="lastNumber" type="3" type_size="1" nature="2" inner="0" tooltip="" id="6" />
                         <Parameter name="message" inherits_from_parent="0" content_type="3" value="" default_value="" custom_choice="0" tooltip="" id="7" />
                       </Box>
-                      <Box name="Text Edit (5)" id="14" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="250" y="492">
-                        <bitmap>media/images/box/interaction/vocabulary.png</bitmap>
-                        <script language="4">
-                          <content>
-                            <![CDATA[# /!\ Generated content. Do not edit!
-class MyClass(GeneratedClass):
-	def __init__(self):
-		GeneratedClass.__init__(self)
-
-	def onInput_onStart(self):
-		self.onStopped("And, Go!")]]>
-                          </content>
-                        </script>
-                        <pluginContent>
-                          <text>
-                            <![CDATA[And, Go!]]>
-                          </text>
-                        </pluginContent>
-                        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
-                        <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" />
-                        <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" />
-                      </Box>
                       <Link inputowner="2" indexofinput="2" outputowner="3" indexofoutput="3" />
                       <Link inputowner="16" indexofinput="2" outputowner="2" indexofoutput="4" />
                       <Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="2" />
@@ -4103,20 +4110,23 @@ class MyClass(GeneratedClass):
                       <Link inputowner="16" indexofinput="2" outputowner="11" indexofoutput="5" />
                       <Link inputowner="12" indexofinput="2" outputowner="8" indexofoutput="4" />
                       <Link inputowner="11" indexofinput="4" outputowner="12" indexofoutput="4" />
-                      <Link inputowner="0" indexofinput="4" outputowner="4" indexofoutput="4" />
                       <Link inputowner="13" indexofinput="2" outputowner="1" indexofoutput="4" />
                       <Link inputowner="13" indexofinput="3" outputowner="12" indexofoutput="3" />
                       <Link inputowner="16" indexofinput="3" outputowner="13" indexofoutput="4" />
                       <Link inputowner="5" indexofinput="2" outputowner="16" indexofoutput="5" />
+                      <Link inputowner="17" indexofinput="2" outputowner="15" indexofoutput="3" />
+                      <Link inputowner="17" indexofinput="2" outputowner="14" indexofoutput="3" />
                       <Link inputowner="19" indexofinput="2" outputowner="18" indexofoutput="3" />
                       <Link inputowner="18" indexofinput="2" outputowner="16" indexofoutput="4" />
-                      <Link inputowner="20" indexofinput="4" outputowner="16" indexofoutput="4" />
-                      <Link inputowner="17" indexofinput="2" outputowner="20" indexofoutput="6" />
                       <Link inputowner="20" indexofinput="2" outputowner="19" indexofoutput="4" />
                       <Link inputowner="15" indexofinput="2" outputowner="19" indexofoutput="5" />
-                      <Link inputowner="17" indexofinput="2" outputowner="15" indexofoutput="3" />
                       <Link inputowner="14" indexofinput="2" outputowner="19" indexofoutput="6" />
-                      <Link inputowner="17" indexofinput="2" outputowner="14" indexofoutput="3" />
+                      <Link inputowner="20" indexofinput="4" outputowner="16" indexofoutput="4" />
+                      <Link inputowner="17" indexofinput="2" outputowner="20" indexofoutput="6" />
+                      <Link inputowner="6" indexofinput="3" outputowner="16" indexofoutput="5" />
+                      <Link inputowner="7" indexofinput="2" outputowner="4" indexofoutput="4" />
+                      <Link inputowner="10" indexofinput="4" outputowner="16" indexofoutput="4" />
+                      <Link inputowner="0" indexofinput="4" outputowner="10" indexofoutput="5" />
                     </Diagram>
                   </BehaviorKeyframe>
                 </BehaviorLayer>
@@ -4270,10 +4280,67 @@ class MyClass(GeneratedClass):
               <Resource name="Standing" type="Lock" timeout="1" />
               <Resource name="All motors" type="Lock" timeout="1" />
             </Box>
+            <Box name="Say Text" id="5" localization="8" tooltip="Say the text received on its input." x="845" y="352">
+              <bitmap>media/images/box/interaction/say.png</bitmap>
+              <script language="4">
+                <content>
+                  <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.tts = self.session().service('ALTextToSpeech')
+        self.ttsStop = self.session().service('ALTextToSpeech') #Create another service as wait is blocking if audioout is remote
+        self.bIsRunning = False
+        self.ids = []
+
+    def onUnload(self):
+        for id in self.ids:
+            try:
+                self.ttsStop.stop(id)
+            except:
+                pass
+        while( self.bIsRunning ):
+            time.sleep( 0.2 )
+
+    def onInput_onStart(self, p):
+        self.bIsRunning = True
+        try:
+            sentence = "\RSPD="+ str( self.getParameter("Speed (%)") ) + "\ "
+            sentence += "\VCT="+ str( self.getParameter("Voice shaping (%)") ) + "\ "
+            sentence += str(p)
+            sentence +=  "\RST\ "
+            id = self.tts.pCall("say",str(sentence))
+            self.ids.append(id)
+            self.tts.wait(id)
+        finally:
+            try:
+                self.ids.remove(id)
+            except:
+                pass
+            if( self.ids == [] ):
+                self.onStopped() # activate output of the box
+                self.bIsRunning = False
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+                </content>
+              </script>
+              <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+              <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
+              <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
+              <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
+              <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="5" />
+              <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
+              <Resource name="Speech" type="Lock" timeout="0" />
+            </Box>
             <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="4" />
             <Link inputowner="1" indexofinput="2" outputowner="25" indexofoutput="4" />
             <Link inputowner="4" indexofinput="2" outputowner="0" indexofoutput="2" />
-            <Link inputowner="0" indexofinput="4" outputowner="4" indexofoutput="4" />
+            <Link inputowner="5" indexofinput="2" outputowner="4" indexofoutput="4" />
+            <Link inputowner="0" indexofinput="4" outputowner="5" indexofoutput="4" />
           </Diagram>
         </BehaviorKeyframe>
       </BehaviorLayer>
