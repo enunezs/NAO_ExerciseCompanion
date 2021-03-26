@@ -1,5 +1,7 @@
 topic: ~AskForName()
 language: enu
 
-u: (hello) Hello! I am the trainer NAO. What is your name?
-u:(my name is _*) nice to meet you $1 $name=$1 $done=$name $onStopped=1 
+u:     (hello) Hello! I am the trainer NAO. What is your name?
+u:    (my name is _*) nice to meet you $name=$1 #$done=$name $onStopped=1 
+u:     (what is my name?) your name is $name
+
